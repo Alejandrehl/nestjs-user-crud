@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UsersController } from './users/users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersService } from './users/users.service';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UsersService } from './users/users.service';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([User]),
   ],
   controllers: [AppController, UsersController],
   providers: [AppService, UsersService],
