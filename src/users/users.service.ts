@@ -11,11 +11,11 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async getAll() {
+  async getAll(): Promise<User[]> {
     return await this.userRepository.find();
   }
 
-  async createUser(newUser: CreateUserDto) {
+  async createUser(newUser: CreateUserDto): Promise<User> {
     const user = new User();
     user.email = newUser.email;
     user.password = newUser.password;
@@ -23,7 +23,7 @@ export class UsersService {
     return await this.userRepository.save(user);
   }
 
-  async updateUser(userId: number, updateUser: CreateUserDto) {
+  async updateUser(userId: number, updateUser: CreateUserDto): Promise<User> {
     const user = await this.userRepository.findOne(userId);
     user.email = updateUser.email;
     user.password = updateUser.password;
@@ -31,7 +31,7 @@ export class UsersService {
     return await this.userRepository.save(user);
   }
 
-  async deleteUser(userId: number) {
+  async deleteUser(userId: number): Promise<any> {
     return await this.userRepository.delete(userId);
   }
 }
